@@ -1,0 +1,19 @@
+{
+  "name": "@nonameffh/react-conditional",
+  "version": "1.0.0",
+  "keywords": [
+    "react","conditional rendering"
+  ],
+  "description": "Yet another react conditional components",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@types/react": "^16.0.0",
+    "react": "^16.0.0",
+    "typescript": "^3.0.0"
+  },
+  "author": "",
+  "license": "MIT"
+}
