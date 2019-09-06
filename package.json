@@ -1,19 +1,28 @@
 {
   "name": "@nonameffh/react-conditional",
-  "version": "1.0.0",
+  "version": "1.0.1",
+  "homepage": "https://github.com/nonameffh/react-conditional",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nonameffh/react-conditional.git"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "keywords": [
-    "react","conditional rendering"
+    "react","conditional rendering", "syntax sugar"
   ],
-  "description": "Yet another react conditional components",
-  "main": "index.js",
+  "description": "Yet another syntax sugar for conditional rendering in React",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc && tsc --module umd --outDir ./umd"
   },
   "devDependencies": {
     "@types/react": "^16.0.0",
     "react": "^16.0.0",
     "typescript": "^3.0.0"
   },
-  "author": "",
-  "license": "MIT"
+  "author": "nonameFFh <nonameffh@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nonameffh/react-conditional"
+  }
 }

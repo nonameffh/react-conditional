@@ -1,3 +1,4 @@
+"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -22,7 +23,8 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
-import * as React from "react";
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = require("react");
 function normalize(value) {
     return typeof value === "function" ? value() : value;
 }
@@ -33,15 +35,15 @@ var ForEach = /** @class */ (function (_super) {
     }
     ForEach.prototype.render = function () {
         var _this = this;
-        return this.props["for"].map(function (item, index) {
+        return this.props.for.map(function (item, index) {
             return React.Children.map(_this.props.children, function (children) {
-                return React.createElement(children["type"], __assign({}, children["props"], { item: item, index: index }));
+                return React.createElement(children["type"], __assign(__assign({}, children["props"]), { item: item, index: index }));
             });
         });
     };
     return ForEach;
 }(React.Component));
-export { ForEach };
+exports.ForEach = ForEach;
 var ForIn = /** @class */ (function (_super) {
     __extends(ForIn, _super);
     function ForIn() {
@@ -49,15 +51,15 @@ var ForIn = /** @class */ (function (_super) {
     }
     ForIn.prototype.render = function () {
         var _this = this;
-        return Object.keys(this.props["for"]).map((function (k) {
+        return Object.keys(this.props.for).map((function (k) {
             return React.Children.map(_this.props.children, function (children) {
-                return React.createElement(children["type"], __assign({}, children["props"], { item: _this.props["for"][k], index: k }));
+                return React.createElement(children["type"], __assign(__assign({}, children["props"]), { item: _this.props.for[k], index: k }));
             });
         }));
     };
     return ForIn;
 }(React.Component));
-export { ForIn };
+exports.ForIn = ForIn;
 var Case = /** @class */ (function (_super) {
     __extends(Case, _super);
     function Case() {
@@ -68,7 +70,7 @@ var Case = /** @class */ (function (_super) {
     };
     return Case;
 }(React.Component));
-export { Case };
+exports.Case = Case;
 var Default = /** @class */ (function (_super) {
     __extends(Default, _super);
     function Default() {
@@ -79,7 +81,7 @@ var Default = /** @class */ (function (_super) {
     };
     return Default;
 }(React.Component));
-export { Default };
+exports.Default = Default;
 var Switch = /** @class */ (function (_super) {
     __extends(Switch, _super);
     function Switch() {
@@ -89,24 +91,24 @@ var Switch = /** @class */ (function (_super) {
         var _this = this;
         var result = {
             matched: [],
-            "default": null
+            default: null
         };
         React.Children.forEach(this.props.children, function (child) {
             if (child["type"] === Case && normalize(child["props"]["condition"]) === normalize(_this.props.value)) {
                 result.matched.push(child);
             }
             else if (child["type"] === Default) {
-                result["default"] = child;
+                result.default = child;
             }
         });
         return result.matched.length > 0
             ? result.matched
-            : result["default"];
+            : result.default;
     };
     Switch.defaultProps = { value: true };
     return Switch;
 }(React.Component));
-export { Switch };
+exports.Switch = Switch;
 var Then = /** @class */ (function (_super) {
     __extends(Then, _super);
     function Then() {
@@ -117,7 +119,7 @@ var Then = /** @class */ (function (_super) {
     };
     return Then;
 }(React.Component));
-export { Then };
+exports.Then = Then;
 var ElseIf = /** @class */ (function (_super) {
     __extends(ElseIf, _super);
     function ElseIf() {
@@ -128,7 +130,7 @@ var ElseIf = /** @class */ (function (_super) {
     };
     return ElseIf;
 }(React.Component));
-export { ElseIf };
+exports.ElseIf = ElseIf;
 var Else = /** @class */ (function (_super) {
     __extends(Else, _super);
     function Else() {
@@ -139,7 +141,7 @@ var Else = /** @class */ (function (_super) {
     };
     return Else;
 }(React.Component));
-export { Else };
+exports.Else = Else;
 var If = /** @class */ (function (_super) {
     __extends(If, _super);
     function If() {
@@ -150,12 +152,12 @@ var If = /** @class */ (function (_super) {
         var result = null;
         React.Children.forEach(this.props.children, function (child) {
             if (result) {
-                return;
+                return result;
             }
-            if (child["type"] === Then && normalize(_this.props.condition)) {
-                return child;
+            if (normalize(_this.props.condition) && child["type"] === Then) {
+                result = child;
             }
-            else if (child["type"] === ElseIf && normalize(child["props"]["condition"])) {
+            else if (normalize(child["props"]["condition"]) && child["type"] === ElseIf) {
                 result = child;
             }
             else if (child["type"] === Else) {
@@ -166,5 +168,5 @@ var If = /** @class */ (function (_super) {
     };
     return If;
 }(React.Component));
-export { If };
+exports.If = If;
 //# sourceMappingURL=components.js.map

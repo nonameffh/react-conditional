@@ -86,12 +86,12 @@ export class If extends React.Component<{ condition: any }, {}> {
 
         React.Children.forEach(this.props.children, child => {
             if (result) {
-                return;
+                return result;
             }
 
-            if (child["type"] === Then && normalize(this.props.condition)) {
-                return child as Then;
-            } else if (child["type"] === ElseIf && normalize(child["props"]["condition"])) {
+            if (normalize(this.props.condition) && child["type"] === Then) {
+                result = child as Then;
+            } else if (normalize(child["props"]["condition"]) && child["type"] === ElseIf) {
                 result = child as ElseIf;
             } else if (child["type"] === Else) {
                 result = child as Else;
