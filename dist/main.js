@@ -37,7 +37,7 @@ var ForEach = /** @class */ (function (_super) {
         var _this = this;
         return this.props.for.map(function (item, index) {
             return React.Children.map(_this.props.children, function (children) {
-                return React.createElement(children["type"], __assign(__assign({}, children["props"]), { item: item, index: index }));
+                return React.createElement(children["type"], __assign({}, children["props"], { item: item, index: index }));
             });
         });
     };
@@ -53,7 +53,7 @@ var ForIn = /** @class */ (function (_super) {
         var _this = this;
         return Object.keys(this.props.for).map((function (k) {
             return React.Children.map(_this.props.children, function (children) {
-                return React.createElement(children["type"], __assign(__assign({}, children["props"]), { item: _this.props.for[k], index: k }));
+                return React.createElement(children["type"], __assign({}, children["props"], { item: _this.props.for[k], index: k }));
             });
         }));
     };
@@ -87,25 +87,26 @@ var Switch = /** @class */ (function (_super) {
     function Switch() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
+    Switch.prototype.normalize = function (value) {
+        return normalize(value);
+    };
     Switch.prototype.render = function () {
-        var _this = this;
-        var result = {
-            matched: [],
-            default: null
-        };
-        React.Children.forEach(this.props.children, function (child) {
-            if (child["type"] === Case && normalize(child["props"]["condition"]) === normalize(_this.props.value)) {
-                result.matched.push(child);
+        var matched = [];
+        for (var _i = 0, _a = React.Children.toArray(this.props.children); _i < _a.length; _i++) {
+            var child = _a[_i];
+            if (this.normalize(child["props"]["condition"]) === this.normalize(this.props.value) && child["type"] === Case) {
+                matched.push(child);
+                if (this.props.strict) {
+                    return matched;
+                }
             }
             else if (child["type"] === Default) {
-                result.default = child;
+                return child;
             }
-        });
-        return result.matched.length > 0
-            ? result.matched
-            : result.default;
+        }
+        return matched.length > 0 ? matched : null;
     };
-    Switch.defaultProps = { value: true };
+    Switch.defaultProps = { value: true, strict: true };
     return Switch;
 }(React.Component));
 exports.Switch = Switch;
@@ -147,26 +148,24 @@ var If = /** @class */ (function (_super) {
     function If() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
+    If.prototype.normalize = function (value) {
+        return normalize(value);
+    };
     If.prototype.render = function () {
-        var _this = this;
-        var result = null;
-        React.Children.forEach(this.props.children, function (child) {
-            if (result) {
-                return result;
+        for (var _i = 0, _a = React.Children.toArray(this.props.children); _i < _a.length; _i++) {
+            var child = _a[_i];
+            if (this.normalize(this.props.condition) && child["type"] === Then) {
+                return child;
             }
-            if (normalize(_this.props.condition) && child["type"] === Then) {
-                result = child;
-            }
-            else if (normalize(child["props"]["condition"]) && child["type"] === ElseIf) {
-                result = child;
+            else if (this.normalize(child["props"]["condition"]) && child["type"] === ElseIf) {
+                return child;
             }
             else if (child["type"] === Else) {
-                result = child;
+                return child;
             }
-        });
-        return result;
+        }
+        return null;
     };
     return If;
 }(React.Component));
 exports.If = If;
-//# sourceMappingURL=components.js.map

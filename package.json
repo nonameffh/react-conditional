@@ -6,14 +6,16 @@
     "type": "git",
     "url": "git+https://github.com/nonameffh/react-conditional.git"
   },
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/main.js",
+  "types": "dist/main.d.ts",
   "keywords": [
-    "react","conditional rendering", "syntax sugar"
+    "react",
+    "conditional rendering",
+    "syntax sugar"
   ],
   "description": "Yet another syntax sugar for conditional rendering in React",
   "scripts": {
-    "build": "tsc && tsc --module umd --outDir ./umd"
+    "build": "tsc"
   },
   "devDependencies": {
     "@types/react": "^16.0.0",
@@ -23,6 +25,6 @@
   "author": "nonameFFh <nonameffh@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/nonameffh/react-conditional"
+    "url": "https://github.com/nonameffh/react-conditional/issues"
   }
 }

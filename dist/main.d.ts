@@ -27,11 +27,14 @@ export declare class Default extends React.Component {
 }
 export declare class Switch extends React.Component<{
     value: any;
+    strict: boolean;
 }, {}> {
     static defaultProps: {
         value: boolean;
+        strict: boolean;
     };
-    render(): Default | Case[];
+    protected normalize(value: any): any;
+    render(): {};
 }
 export declare class Then extends React.Component {
     render(): React.ReactNode;
@@ -47,5 +50,6 @@ export declare class Else extends React.Component {
 export declare class If extends React.Component<{
     condition: any;
 }, {}> {
+    protected normalize(value: any): any;
     render(): Then | ElseIf | Else;
 }

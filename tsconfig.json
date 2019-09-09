@@ -1,8 +1,7 @@
 {
-  "compileOnSave":   false,
   "compilerOptions": {
     "jsx":              "react",
-    "sourceMap":        true,
+    "sourceMap":        false,
     "declaration":      true,
     "moduleResolution": "node",
     "target":           "es5",
@@ -11,8 +10,7 @@
     "lib":              ["es2015"]
   },
   "include":         [
-    "./src/**/*.ts",
-    "./src/**/*.tsx"
+    "./src/main.tsx"
   ],
   "exclude":         [
     "node_modules"
