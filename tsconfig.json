@@ -4,8 +4,8 @@
     "sourceMap":        false,
     "declaration":      true,
     "moduleResolution": "node",
-    "target":           "es5",
-    "module":           "commonjs",
+    "target":           "es2015",
+    "module":           "es2015",
     "outDir":           "./dist",
     "lib":              ["es2015"]
   },

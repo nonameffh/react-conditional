@@ -6,7 +6,9 @@
     "type": "git",
     "url": "git+https://github.com/nonameffh/react-conditional.git"
   },
-  "main": "dist/main.js",
+  "main": "dist/main.cjs.js",
+  "module": "dist/main.es2015.js",
+  "esnext": "dist/main.es2015.js",
   "types": "dist/main.d.ts",
   "keywords": [
     "react",
@@ -15,12 +17,14 @@
   ],
   "description": "Yet another syntax sugar for conditional rendering in React",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc && mv dist/main.js dist/main.es2015.js && rollup -c rollup.config.js"
   },
   "devDependencies": {
     "@types/react": "^16.0.0",
     "react": "^16.0.0",
-    "typescript": "^3.0.0"
+    "rollup": "^1.21.2",
+    "typescript": "^3.0.0",
+    "uglifyjs": "^2.4.11"
   },
   "author": "nonameFFh <nonameffh@gmail.com>",
   "license": "MIT",
